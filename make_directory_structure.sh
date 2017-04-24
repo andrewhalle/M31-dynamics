@@ -12,3 +12,6 @@ mkdir images/density_start/random
 
 #angular momentum and energy
 mkdir images/conservation
+
+#avg_e
+mkdir images/average_e_vs_time_all
