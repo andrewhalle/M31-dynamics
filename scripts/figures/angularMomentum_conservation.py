@@ -3,6 +3,8 @@ import numpy as np
 import matplotlib as mpl
 mpl.use("Agg")
 import matplotlib.pyplot as plt
+import sys
+import os
 
 def calculate_angular_momentum(sim):
     com = sim.calculate_com()
@@ -13,16 +15,19 @@ def calculate_angular_momentum(sim):
         j = j + np.cross(r, v)
     return np.linalg.norm(j)
         
-
-initial = rebound.Simulation.from_file("../logs/high_mass_1/000000000.log")
+sim_number = sys.argv[1].zfill(3)
+initial = rebound.Simulation.from_file("../../logs/suite/" + sim_number + "/000000000.log")
 initial_mom = calculate_angular_momentum(initial)
 
+sims = os.listdir("../../logs/suite/" + sim_number)
+sims.sort()
+sims.pop()
 data = []
-i = 0
-while i < 15000000:
-    sim = rebound.Simulation.from_file("../logs/high_mass_1/" + str(i).zfill(9) + ".log")
+i = 1
+while i < len(sims):
+    sim = rebound.Simulation.from_file("../../logs/suite/" + sim_number + "/" + sims[i])
     data.append([i, (calculate_angular_momentum(sim) - initial_mom) / initial_mom])
-    i += 10000
+    i += 1
 
 x = [a[0] for a in data]
 y = [a[1] for a in data]
@@ -30,4 +35,4 @@ y = [a[1] for a in data]
 plt.plot(x, y, 'k')
 plt.xlabel("Time")
 plt.ylabel("Error")
-plt.savefig("../images/conservation/angular.png")
+plt.savefig("../../images/conservation/angularMomentum.png")

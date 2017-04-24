@@ -5,7 +5,9 @@ import numpy as np
 import rebound
 import pickle
 import os
-from disk_splitter_copy import disk_splitter
+import sys
+sys.path.append("..")
+from include.disk_splitter_include import disk_splitter
 
 def get_completed_sims():
     sims = os.listdir("../logs/suite")
