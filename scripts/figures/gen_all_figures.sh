@@ -1,2 +1,0 @@
-python angularMomentum_conservation.py
-python energy_conservation.py

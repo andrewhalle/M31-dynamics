@@ -1,0 +1,9 @@
+import os
+
+# conservation
+sim_numbers = os.listdir("../../logs/suite_u/")
+sim_numbers.sort()
+for sim_number in sim_numbers:
+    print(sim_number)
+    os.system("python angularMomentum_conservation.py " + sim_number)   #angular momentum
+    os.system("python energy_conservation.py " + sim_number)            #energy

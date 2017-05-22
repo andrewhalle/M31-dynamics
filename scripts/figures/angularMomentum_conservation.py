@@ -6,6 +6,9 @@ import matplotlib.pyplot as plt
 import sys
 import os
 
+sys.path.append("../include")
+from universal_logs import *
+
 def calculate_angular_momentum(sim):
     com = sim.calculate_com()
     j = np.array([0, 0, 0])
@@ -16,16 +19,16 @@ def calculate_angular_momentum(sim):
     return np.linalg.norm(j)
         
 sim_number = sys.argv[1].zfill(3)
-initial = rebound.Simulation.from_file("../../logs/suite/" + sim_number + "/000000000.log")
+initial = restore("../../logs/suite_u/" + sim_number + "/000000000.logu")
 initial_mom = calculate_angular_momentum(initial)
 
-sims = os.listdir("../../logs/suite/" + sim_number)
+sims = os.listdir("../../logs/suite_u/" + sim_number)
 sims.sort()
 sims.pop()
 data = []
 i = 1
 while i < len(sims):
-    sim = rebound.Simulation.from_file("../../logs/suite/" + sim_number + "/" + sims[i])
+    sim = restore("../../logs/suite_u/" + sim_number + "/" + sims[i])
     data.append([i, (calculate_angular_momentum(sim) - initial_mom) / initial_mom])
     i += 1
 
@@ -35,4 +38,4 @@ y = [a[1] for a in data]
 plt.plot(x, y, 'k')
 plt.xlabel("Time")
 plt.ylabel("Error")
-plt.savefig("../../images/conservation/angularMomentum.png")
+plt.savefig("../../images/conservation/angular_momentum/" + sim_number + ".png")
