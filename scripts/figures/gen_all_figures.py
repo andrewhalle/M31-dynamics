@@ -9,4 +9,7 @@ import os
 #    os.system("python energy_conservation.py " + sim_number)            #energy
 
 #disk_imager
-os.system("python disk_imager.py")
+#os.system("python disk_imager.py")
+
+#avg_e_vs_time_all
+os.system("python avg_e_vs_time_all.py")
