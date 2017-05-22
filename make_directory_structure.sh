@@ -10,3 +10,6 @@ mkdir images/disk_imager
 
 #avg_e_vs_time_all
 mkdir images/avg_e_vs_time_all
+
+#disk_splitter
+mkdir images/disk_splitter

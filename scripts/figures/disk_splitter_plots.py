@@ -5,6 +5,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 import pickle
+import sys
+
+sys.path.append("../include")
+from universal_logs import *
+from M31config import Config
 
 def get_r(sim, particle):
     com = sim.calculate_com()
@@ -50,18 +55,18 @@ def ie_stdev(ies):
     var = np.average(square_devs)
     return np.sqrt(var)
 
-path = "../logs/suite/012/"
-look_ahead = 5
+c = Config("disk_splitter_plots.config")
+path = "../../logs/suite_u/" + c.sim_number + "/"
+look_ahead = c.look_ahead
 logs = os.listdir(path)
 logs.sort()
-logs.pop()
 num_logs = len(logs)
 i = 0
 data = [["", "", ""], ["", "", ""], ["", "", ""], ["", "", ""], ["", "", ""], ["", "", ""], ["", "", ""], ["", "", ""], ["", "", ""], ["", "", ""]]
 
-while i < len(logs) - 5:
-    sim1 = rebound.Simulation.from_file(path + logs[i])
-    sim2 = rebound.Simulation.from_file(path + logs[i + look_ahead])
+while i < num_logs - look_ahead:
+    sim1 = restore(path + logs[i])
+    sim2 = restore(path + logs[i + look_ahead])
     ps1 = [p for p in sim1.particles if p.id != 0]
     ps2 = [p for p in sim2.particles if p.id != 0]
     x = 0
@@ -75,8 +80,8 @@ while i < len(logs) - 5:
             data1.append([a, delta, ie1])
         x += 1
     
-    smallest = 1
-    biggest = 4
+    smallest = c.smallest
+    biggest = c.biggest
     step = (biggest - smallest) / 10
     counter = smallest
     bin_index = 0
@@ -101,7 +106,6 @@ while i < len(logs) - 5:
         bin_index += 1
     i += 1
 
-pickle.dump(data, open("../images/disk_splitter_ie_mean_timeavg/data.list", "wb"))
 data = [d for d in data if d[0] != ""]
 a = [d[0] for d in data]
 mean_delta = [np.average(d[1]) for d in data]
@@ -115,12 +119,12 @@ ax1.set_ylabel(r"$\Delta i_e$", color="b")
 ax1.set_ylim([-np.pi/30, np.pi/30])
 ax1.set_xlim([2, 3])
 
-#ax2 = ax1.twinx()
-#ax2.plot(a, stdev, "ro")
-#ax2.plot(a, stdev, "r", lw=2)
-#ax2.set_ylabel(r"$\sigma_{i_e}$", color="r")
-#ax2.set_ylim([0, np.pi/2])
-#ax2.set_xlim([0, 2.5])
+ax2 = ax1.twinx()
+ax2.plot(a, stdev, "ro")
+ax2.plot(a, stdev, "r", lw=2)
+ax2.set_ylabel(r"$\sigma_{i_e}$", color="r")
+ax2.set_ylim([0, np.pi/2])
+ax2.set_xlim([0, 2.5])
 
-plt.savefig("../images/disk_splitter_ie_mean_timeavg/new.png")
+plt.savefig("../../images/disk_splitter/plot.png")
 plt.close("all")

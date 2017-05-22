@@ -12,4 +12,7 @@ import os
 #os.system("python disk_imager.py")
 
 #avg_e_vs_time_all
-os.system("python avg_e_vs_time_all.py")
+#os.system("python avg_e_vs_time_all.py")
+
+#disk_splitter
+os.system("python disk_splitter_plots.py")
