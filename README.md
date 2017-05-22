@@ -7,3 +7,6 @@ What has been missing from this explanation is a method to stabilize this eccent
 # About the code
 To accomplish these *N*-body simulations, we use the Python package [`REBOUND`](https://github.com/hannorein/rebound) to simulate 100 particles orbiting a supermassive black hole. The central black hole is 100 times more massive than the disk of stars surrounding it.
 This code also relies upon the [`matplotlib`](https://github.com/matplotlib/matplotlib) and [`numpy`](https://github.com/numpy/numpy) packages for data analysis.
+
+# Running
+The simplest way to run this code is to make use of the scripts `make_directory_structure.sh` and `scripts/figures/gen_all_figures.py`. `make_directory_structure.sh` creates the images directories that the data analysis scripts depend on. `gen_all_figures.py` runs all figure-producing code. This script should take some time to run and should populate the image directory with the figures. `make_directory_structure.sh` should be run first.
