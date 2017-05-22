@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 import pickle
+from universal_logs import *
 
 def get_r(sim, particle):
     com = sim.calculate_com()
@@ -54,13 +55,12 @@ def disk_splitter(path):
     look_ahead = 5
     logs = os.listdir(path)
     logs.sort()
-    logs.pop()
     i = 0
     data = [["", "", ""], ["", "", ""], ["", "", ""], ["", "", ""], ["", "", ""], ["", "", ""], ["", "", ""], ["", "", ""], ["", "", ""], ["", "", ""]]
 
     while i < len(logs) - look_ahead:
-        sim1 = rebound.Simulation.from_file(path + "/" + logs[i])
-        sim2 = rebound.Simulation.from_file(path + "/" + logs[i + look_ahead])
+        sim1 = restore(path + "/" + logs[i])
+        sim2 = restore(path + "/" + logs[i + look_ahead])
         ps1 = [p for p in sim1.particles if p.id != 0]
         ps2 = [p for p in sim2.particles if p.id != 0]
         x = 0

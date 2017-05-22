@@ -22,3 +22,6 @@ mkdir images/e_vs_time
 
 #inc_vs_a_avg
 mkdir images/inc_vs_a_avg
+
+#initial_e_vs_mass_ratio
+mkdir images/initial_e_vs_mass_ratio
