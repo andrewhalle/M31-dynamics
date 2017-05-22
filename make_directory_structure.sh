@@ -16,3 +16,6 @@ mkdir images/disk_splitter
 
 #e_vs_a_avg
 mkdir images/e_vs_a_avg
+
+#e_vs_time
+mkdir images/e_vs_time

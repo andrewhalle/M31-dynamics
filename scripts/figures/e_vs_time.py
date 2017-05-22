@@ -4,16 +4,22 @@ mpl.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 import os
+import sys
 
-stars = [10, 20, 30]
+sys.path.append("../include")
+from universal_logs import *
+from M31config import Config
 
-path = "../logs/suite/02/"
+c = Config("e_vs_time.config")
+stars = c.stars
+
+path = "../../logs/suite_u/" + c.sim_number + "/"
 logs = os.listdir(path)
 logs.sort()
 del logs[len(logs) - 1]
 data = []
 for log in logs:
-    sim = rebound.Simulation.from_file(path + log)
+    sim = restore(path + log)
     ps = [p for p in sim.particles if p.id in stars]
     data.append([(sim.t, 1 - ps[0].e), (sim.t, 1 - ps[1].e), (sim.t, 1 - ps[2].e)])
     
@@ -29,6 +35,6 @@ plt.xlabel("Time (Periods of innermost orbit)")
 plt.ylabel("1 - e")
 plt.grid()
 
-plt.savefig("../e_vs_time.svg")
+plt.savefig("../../images/e_vs_time/plot.png")
 plt.close("all")
 

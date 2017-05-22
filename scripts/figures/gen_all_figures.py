@@ -18,4 +18,7 @@ import os
 #os.system("python disk_splitter_plots.py")
 
 #e_vs_a_avg
-os.system("python e_vs_a_avg.py")
+#os.system("python e_vs_a_avg.py")
+
+#e_vs_time
+os.system("python e_vs_time.py")
