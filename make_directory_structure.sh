@@ -19,3 +19,6 @@ mkdir images/e_vs_a_avg
 
 #e_vs_time
 mkdir images/e_vs_time
+
+#inc_vs_a_avg
+mkdir images/inc_vs_a_avg

@@ -21,4 +21,7 @@ import os
 #os.system("python e_vs_a_avg.py")
 
 #e_vs_time
-os.system("python e_vs_time.py")
+#os.system("python e_vs_time.py")
+
+#inc_vs_a_avg
+os.system("python inc_vs_a_avg.py")
