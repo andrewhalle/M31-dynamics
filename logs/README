@@ -1,4 +1,0 @@
-something something here about logs saved at regularly spaced intervals
-
-In Python:
-   sim = rebound.Simulation.from_file("name_of.log")
