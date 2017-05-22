@@ -1,23 +1,26 @@
-# run from m31_summer
-
 import os
+import sys
 import rebound
 import matplotlib as mpl
 mpl.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
-sim_number = "035"  #change this
+sys.path.append("../include")
+from universal_logs import *
+from M31config import Config
 
-sims = os.listdir("logs/suite/" + sim_number)
+c = Config("e_vs_a_avg.config")
+sim_number = c.sim_number
+
+sims = os.listdir("../../logs/suite_u/" + sim_number)
 sims.sort()
-sims.pop()
 
 a = np.linspace(0, 5, 10)
 ecc = []
 
 for sim in sims:
-    s = rebound.Simulation.from_file("logs/suite/" + sim_number + "/" + sim)
+    s = restore("../../logs/suite_u/" + sim_number + "/" + sim)
     ps = [p for p in s.particles if p.id != 0]
     e = np.zeros(10)
     a_start = a[0]
@@ -43,5 +46,5 @@ plt.plot(a[:9], ecc_avg[:9], 'b')
 plt.plot(a[:9], ecc_avg[:9], 'bo')
 plt.xlabel("Semi-major axis")
 plt.ylabel("Eccentricity")
-plt.savefig("images/e_vs_a_avg/" + sim_number + "_e_vs_a_avg.png")
+plt.savefig("../../images/e_vs_a_avg/" + sim_number + "_e_vs_a_avg.png")
 plt.close()
