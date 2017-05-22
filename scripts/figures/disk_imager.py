@@ -8,9 +8,14 @@ from matplotlib.colors import Normalize
 import scipy.misc
 import sys
 
-x_angle = eval(sys.argv[1])     #0 * (np.pi / 180)
-y_angle = eval(sys.argv[2])     #0 * (np.pi / 180)
-z_angle = 0 * (np.pi / 180)
+sys.path.append("../include")
+from universal_logs import *
+from M31config import Config
+
+c = Config("disk_imager.config")
+x_angle = c.x_angle * (np.pi / 180)
+y_angle = c.y_angle * (np.pi / 180)
+z_angle = c.z_angle * (np.pi / 180)
 
 rot_x = np.array([[1, 0, 0], [0, np.cos(x_angle), -np.sin(x_angle)], [0, np.sin(x_angle), np.cos(x_angle)]])
 rot_y = np.array([[np.cos(y_angle), 0, np.sin(y_angle)], [0, 1, 0], [-np.sin(y_angle), 0, np.cos(y_angle)]])
@@ -71,8 +76,8 @@ def get_all_densities(sim):
 
 
 #image generation
-sim = rebound.Simulation.from_file("../logs/suite/020/000003999.log")
-limit = 3
+sim = restore("../../logs/suite_u/" + c.sim_number + "/" + c.sim)
+limit = c.limit
 image_width = 80
 pixel_width = (2 * limit) / image_width
 y = limit
@@ -107,8 +112,4 @@ for i in range(image_width):
 plt.imshow(img, clim=(-4, 0.75))
 plt.colorbar()
 plt.scatter(40, 40, s=120, c="black", marker="*")
-plt.savefig("../images/density_start/random/" + sys.argv[3] + ".png")
-file = open("../images/density_start/random/" + sys.argv[3] + ".dat", "w")
-file.write(str(x_angle) + "\n")
-file.write(str(y_angle) + "\n")
-file.close()
+plt.savefig("../../images/disk_imager/disk.png")
