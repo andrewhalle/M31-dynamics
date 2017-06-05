@@ -108,7 +108,7 @@ for i in range(image_width):
         img[i, j] = velocity_here
         x += pixel_width
     y -= pixel_width
-plt.imshow(img, clim=(-4, 0.75))
+plt.imshow(img, cmap="bwr")
 plt.colorbar()
 plt.scatter(40, 40, s=120, c="black", marker="*")
 plt.savefig("../../images/disk_imager_velocity/disk.png")
