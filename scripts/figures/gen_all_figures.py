@@ -11,6 +11,7 @@ for sim_number in sim_numbers:
 #disk_imager
 os.system("python disk_imager.py")
 os.system("python disk_imager_velocity.py")
+os.system("python disk_imager_dispersion.py")
 
 #avg_e_vs_time_all
 os.system("python avg_e_vs_time_all.py")

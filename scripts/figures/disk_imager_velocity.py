@@ -42,8 +42,8 @@ def orbit_density(sim, particle):
 
         v1 = np.array([p1.vx, p1.vy, p1.vz]).reshape((3, 1))
         v2 = np.array([p2.vx, p2.vy, p2.vz]).reshape((3, 1))
-        v1 = np.dot(rot_x, np.dot(rot_y, np.dot(rot_z, r1)))
-        v2 = np.dot(rot_x, np.dot(rot_y, np.dot(rot_z, r2)))
+        v1 = np.dot(rot_x, np.dot(rot_y, np.dot(rot_z, v1)))
+        v2 = np.dot(rot_x, np.dot(rot_y, np.dot(rot_z, v2)))
 
         positions.append(((r1[0][0], r1[1][0], r1[2][0]), (r2[0][0], r2[1][0], r2[2][0])))
         velocities.append((v1[2] + v2[2]) / 2)
@@ -108,10 +108,10 @@ for i in range(image_width):
                 y2 = pos[k][1][1]
                 if ((x1 > x_min and x1 < x_max) or (x2 > x_min and x2 < x_max)) and ((y1 > y_min and y1 < y_max) or (y2 > y_min and y2 < y_max)):
                     velocity_here += vel[k]
-        img[i, j] = velocity_here
+        img[i, j] = -velocity_here
         x += pixel_width
     y -= pixel_width
-plt.imshow(img, cmap="bwr")
+plt.imshow(img, cmap="bwr", clim=(-np.max(np.abs(img)), np.max(np.abs(img))))
 plt.colorbar()
 plt.scatter(40, 40, s=120, c="black", marker="*")
 plt.savefig("../../images/disk_imager_velocity/disk.png")

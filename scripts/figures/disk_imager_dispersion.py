@@ -46,8 +46,8 @@ def orbit_density(sim, particle):
 
         v1 = np.array([p1.vx, p1.vy, p1.vz]).reshape((3, 1))
         v2 = np.array([p2.vx, p2.vy, p2.vz]).reshape((3, 1))
-        v1 = np.dot(rot_x, np.dot(rot_y, np.dot(rot_z, r1)))
-        v2 = np.dot(rot_x, np.dot(rot_y, np.dot(rot_z, r2)))
+        v1 = np.dot(rot_x, np.dot(rot_y, np.dot(rot_z, v1)))
+        v2 = np.dot(rot_x, np.dot(rot_y, np.dot(rot_z, v2)))
 
         positions.append(((r1[0][0], r1[1][0], r1[2][0]), (r2[0][0], r2[1][0], r2[2][0])))
         velocities.append((v1[2] + v2[2]) / 2)
@@ -119,7 +119,7 @@ for i in range(image_width):
         img[i, j] = stdev
         x += pixel_width
     y -= pixel_width
-plt.imshow(img, cmap="jet")
+plt.imshow(img, cmap="jet", clim=(0, 1))
 plt.colorbar()
 plt.scatter(40, 40, s=120, c="black", marker="*")
 plt.savefig("../../images/disk_imager_dispersion/disk.png")
