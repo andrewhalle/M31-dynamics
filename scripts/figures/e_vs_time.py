@@ -1,3 +1,7 @@
+# Used for examining the structure of disks #
+# over time. Generates average eccentricity #
+# versus time graph.                        #
+
 import rebound
 import matplotlib as mpl
 mpl.use("Agg")

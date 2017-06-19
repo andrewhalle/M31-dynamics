@@ -1,3 +1,8 @@
+# Roughly calculates the semi-major axis       #
+# at which the inner and outer disk separate.  #
+# Generates graph of rotation direction versus #
+# semi-major axis. #
+
 import rebound
 import matplotlib as mpl
 mpl.use("Agg")

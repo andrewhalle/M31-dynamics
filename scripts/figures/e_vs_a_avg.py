@@ -1,3 +1,7 @@
+# Bins stars by semi-major axis and graphs    #
+# average eccentricity for each bin. Used for #
+# examining the structure of disks.           #
+
 import os
 import sys
 import rebound

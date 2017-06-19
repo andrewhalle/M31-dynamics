@@ -1,3 +1,7 @@
+# Generates "observation" of simulation     #
+# given some initial parameters and viewing #
+# angle.                                    #
+
 import rebound
 import numpy as np
 import matplotlib as mpl

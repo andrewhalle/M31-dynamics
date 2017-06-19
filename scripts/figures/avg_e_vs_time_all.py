@@ -1,3 +1,7 @@
+# Generates graph of average eccentricity  #
+# of the simulation versus time. Combines  #
+# these graphs for all simulations.        #
+
 import rebound
 import matplotlib as mpl
 mpl.use("Agg")

@@ -1,3 +1,6 @@
+# Same as disk imager, but generates    #
+# "spectrum" instead of observed image. #
+
 import rebound
 import numpy as np
 import matplotlib as mpl

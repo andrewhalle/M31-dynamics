@@ -1,3 +1,7 @@
+# Bins stars by semi-major axis and graphs    #
+# semi-major axis against average inclination #
+# in each bin.                                #
+
 import os
 import rebound
 import matplotlib as mpl

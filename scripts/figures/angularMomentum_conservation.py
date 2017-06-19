@@ -1,3 +1,7 @@
+# Generates figure which shows change # 
+# in total angular momentum of the    #
+# simulation versus time              #
+
 import rebound
 import numpy as np
 import matplotlib as mpl

@@ -1,3 +1,8 @@
+# Uses the disk splitter code to #
+# show the relationship between  #
+# initial eccentricty and final  #
+# mass in the outer disk.        #
+
 import matplotlib as mpl
 mpl.use("Agg")
 import matplotlib.pyplot as plt

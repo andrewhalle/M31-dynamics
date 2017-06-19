@@ -1,3 +1,6 @@
+# Generates graph of change in total energy #
+# of the simulation versus time.            #
+
 import rebound
 import matplotlib as mpl
 mpl.use("Agg")
