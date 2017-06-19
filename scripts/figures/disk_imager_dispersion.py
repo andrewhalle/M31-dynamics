@@ -1,5 +1,9 @@
-# Same as disk imager, but generates    #
-# "spectrum" instead of observed image. #
+# Same as disk imager, but generates     #
+# dispersion of "spectrum" instead of    #
+# observed image. Accomplishes this by   #
+# simply imaging standard deviation of   #
+# velocities along line of sight instead #
+# of sum of velocities.                  #
 
 import rebound
 import numpy as np
@@ -15,7 +19,7 @@ sys.path.append("../include")
 from universal_logs import *
 from M31config import Config
 
-c = Config("disk_imager_velocity.config")
+c = Config("disk_imager_dispersion.config")
 x_angle = c.x_angle * (np.pi / 180)
 y_angle = c.y_angle * (np.pi / 180)
 z_angle = c.z_angle * (np.pi / 180)
@@ -97,7 +101,7 @@ for i in range(image_width):
         x_max = x + pixel_width
         y_max = y
         y_min = y - pixel_width
-        velocity_here = 0
+        velocity_here = []
         for p in d:
             pos = p[0]
             vel = p[1]
@@ -107,11 +111,15 @@ for i in range(image_width):
                 y1 = pos[k][0][1]
                 y2 = pos[k][1][1]
                 if ((x1 > x_min and x1 < x_max) or (x2 > x_min and x2 < x_max)) and ((y1 > y_min and y1 < y_max) or (y2 > y_min and y2 < y_max)):
-                    velocity_here += vel[k]
-        img[i, j] = velocity_here
+                    velocity_here.append(vel[k])
+        if velocity_here == []:
+            stdev = 0
+        else:
+            stdev = np.std(velocity_here)
+        img[i, j] = stdev
         x += pixel_width
     y -= pixel_width
-plt.imshow(img, cmap="bwr")
+plt.imshow(img, cmap="jet")
 plt.colorbar()
 plt.scatter(40, 40, s=120, c="black", marker="*")
-plt.savefig("../../images/disk_imager_velocity/disk.png")
+plt.savefig("../../images/disk_imager_dispersion/disk.png")

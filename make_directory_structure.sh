@@ -8,6 +8,7 @@ mkdir images/conservation/energy
 #disk imager
 mkdir images/disk_imager
 mkdir images/disk_imager_velocity
+mkdir images/disk_imager_dispersion
 
 #avg_e_vs_time_all
 mkdir images/avg_e_vs_time_all
